@@ -6,7 +6,7 @@ namespace ExamplePlugin.Events
     {
         public PlayerHandler() { }
 
-        // 玩家加入游戏事件
+        // 玩家加入游戏
         internal void OnVerified(VerifiedEventArgs ev)
         {
             ev.Player.Broadcast(10, "欢迎来到萌新天堂服务器(°∀°)ﾉ");

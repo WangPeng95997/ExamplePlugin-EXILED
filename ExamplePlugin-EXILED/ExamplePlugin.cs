@@ -9,11 +9,11 @@ namespace ExamplePlugin
     {
         public ExamplePlugin() { }
 
-        static ExamplePlugin Singleton = new ExamplePlugin();
+        public static ExamplePlugin Singleton { get; private set; } = new ExamplePlugin();
 
         public override string Author { get; } = "l4kkS41";
 
-        public override string Name { get; } = "萌新天堂服务器插件v1.0";
+        public override string Name { get; } = "萌新天堂服务器插件v1.0.0";
 
         public override PluginPriority Priority { get; } = PluginPriority.Default;
 
@@ -27,8 +27,8 @@ namespace ExamplePlugin
 
         public override void OnEnabled()
         {
-            //Harmony = new Harmony("l4kkS41.HarmonyPatch");
-            //Harmony.PatchAll();
+            Harmony = new Harmony("l4kkS41.HarmonyPatch");
+            Harmony.PatchAll();
 
             MapHandler = new MapHandler();
             PlayerHandler = new PlayerHandler();
@@ -42,6 +42,8 @@ namespace ExamplePlugin
 
             // ServerHandler
             Exiled.Events.Handlers.Server.RoundStarted += ServerHandler.OnRoundStarted;
+
+            Log.Info($"{this.Name} Has Been Loaded Successfully :)");
 
             base.OnEnabled();
         }
@@ -60,6 +62,8 @@ namespace ExamplePlugin
             MapHandler = null;
             PlayerHandler = null;
             ServerHandler = null;
+
+            Log.Info($"{this.Name} Has Been Disabled :(");
 
             base.OnDisabled();
         }
